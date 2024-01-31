@@ -1,19 +1,19 @@
 // #region Import
-import { Archive, File, ArchiveX, Inbox, Send, Trash2, Users2, AlertCircle, MessagesSquare, ShoppingCart, Search } from "lucide-react";
-import { Bus, Cake, CloudSun, Clover, Fan, Flower2, Ghost, Heart, Snowflake, ThermometerSun, Umbrella } from "lucide-react"
-
+import { Search } from "lucide-react";
 import Navbar from "./components/notes/nav"
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./components/ui/resizable";
 import { useState } from "react";
 import { cn } from "./lib/utils";
 import AccountSwitcher from "./components/notes/accountswitcher";
-import { SideBarLink, accounts } from "./constant/data";
+import { Notes, SideBarLink, accounts } from "./constant/data";
 import { Separator } from "./components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { SideBarLinkProps } from "./interface/ISideBarLink";
+import NoteList from "./components/notes/list";
+import { NoteProps } from "./interface/INotes";
 // #endregion
 
 const App = () => {
@@ -94,16 +94,6 @@ const App = () => {
 						defaultSize={defaultLayout[1]}
 						minSize={15}
 						maxSize={15}
-					// collapsedSize={0}
-					// collapsible={true}
-					// onCollapse={() => {
-					// 	setIsCollapsed(true)
-					// 	document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(true)}`
-					// }}
-					// onExpand={() => {
-					// 	setIsCollapsed(false)
-					// 	document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(false)}`
-					// }}
 					>
 						<div className={cn("flex h-[52px] items-center justify-center", isCollapsed ? 'h-[52px]' : 'px-2')}>
 							<AccountSwitcher
@@ -131,8 +121,8 @@ const App = () => {
 							<div className="flex items-center px-4 py-2">
 								<h1 className="text-xl font-bold">Inbox</h1>
 								<TabsList className="ml-auto">
-									<TabsTrigger value="all" className="text-zinc-600 dark:text-zinc-200">All mail</TabsTrigger>
-									<TabsTrigger value="unread" className="text-zinc-600 dark:text-zinc-200">Unread</TabsTrigger>
+									<TabsTrigger value="all" className="text-zinc-600 dark:text-zinc-200">All Notes</TabsTrigger>
+									<TabsTrigger value="unread" className="text-zinc-600 dark:text-zinc-200">Favorite</TabsTrigger>
 								</TabsList>
 							</div>
 							<Separator />
@@ -145,16 +135,14 @@ const App = () => {
 								</form>
 							</div>
 							<TabsContent value="all" className="m-0">
-								{/* <MailList items={mails} /> */}
-								<h1>List Here</h1>
+								<NoteList notes={Notes} />
 							</TabsContent>
 							<TabsContent value="unread" className="m-0">
-								{/* <MailList items={mails.filter((item) => !item.read)} /> */}
-								<h1>List Here 1</h1>
+							<NoteList notes={Notes.filter((note: NoteProps) => note.isFavorite)} />
 							</TabsContent>
 						</Tabs>
 					</ResizablePanel>
-					<ResizableHandle withHandle />
+					<ResizableHandle />
 					<ResizablePanel defaultSize={defaultLayout[2]}>
 						{/* <MailDisplay
 						mail={mails.find((item) => item.id === mail.selected) || null}
