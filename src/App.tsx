@@ -14,6 +14,7 @@ import { Button } from "./components/ui/button";
 import { SideBarLinkProps } from "./interface/ISideBarLink";
 import NoteList from "./components/notes/list";
 import { NoteProps } from "./interface/INotes";
+import NoteDisplay from "./components/notes/note";
 // #endregion
 
 const App = () => {
@@ -106,10 +107,6 @@ const App = () => {
 							isCollapsed={isCollapsed}
 							links={handleSideBarLink()}
 						/>
-						<Separator className="flex-grow" />
-						<div className="mt-auto">
-							<h1>Test</h1>
-						</div>
 					</ResizablePanel >
 					<ResizableHandle />
 					<ResizablePanel
@@ -144,10 +141,7 @@ const App = () => {
 					</ResizablePanel>
 					<ResizableHandle />
 					<ResizablePanel defaultSize={defaultLayout[2]}>
-						{/* <MailDisplay
-						mail={mails.find((item) => item.id === mail.selected) || null}
-					/> */}
-						<Button>Test</Button>
+						<NoteDisplay />
 					</ResizablePanel>
 				</ResizablePanelGroup>
 			</TooltipProvider>
