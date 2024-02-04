@@ -1,6 +1,6 @@
 // #region Import
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip";
 import { NavProps } from "@/interface/INav";
 import { Link } from "react-router-dom";

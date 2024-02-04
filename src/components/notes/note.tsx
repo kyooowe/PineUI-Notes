@@ -1,4 +1,4 @@
-import React from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { addDays, addHours, format, nextSaturday } from 'date-fns'
 import { BadgePlus, Circle, Copy, Heart, SendToBack, Share2, Trash } from 'lucide-react'
 import { DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
@@ -6,8 +6,21 @@ import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
+import { Editor } from "react-draft-wysiwyg"
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+
+import '../../css/editor.css'
 
 const NoteDisplay = () => {
+
+    // #region UseState
+    const [markDownText, setMarkDownText] = useState<string>("# Your markdown here")
+    const [isEditing, setIsEditing] = useState<boolean>(true)
+    // #endregion
+
     return (
         <div className='flex h-full flex-col'>
             <div className='flex items-center p-2'>
@@ -83,6 +96,15 @@ const NoteDisplay = () => {
                 </div>
             </div>
             <Separator />
+            {
+                isEditing ? (
+                    <div className='h-[51rem] overflow-auto'>
+                        <Editor editorClassName="custom-editor-wrapper" />
+                    </div>
+                ) : (
+                    <Markdown remarkPlugins={[remarkGfm]}>{markDownText}</Markdown>
+                )
+            }
         </div>
     )
 }
