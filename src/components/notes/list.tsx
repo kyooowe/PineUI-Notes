@@ -1,11 +1,11 @@
 // #region Import
+import { useState } from 'react'
 import { NoteListProps, NoteProps } from '@/interface/INotes'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
 import { Trash, Heart } from 'lucide-react'
 // #endregion
 

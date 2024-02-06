@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { addDays, addHours, format, nextSaturday } from 'date-fns'
-import { BadgePlus, Circle, Copy, Heart, SendToBack, Share2, Trash } from 'lucide-react'
+import { BadgePlus, Circle, Copy, FilePenLine, Heart, SendToBack, Share2, Trash } from 'lucide-react'
 import { DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -24,7 +24,7 @@ const NoteDisplay = () => {
     return (
         <div className='flex h-full flex-col'>
             <div className='flex items-center p-2'>
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-1'>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button variant="ghost" size="icon">
@@ -54,7 +54,7 @@ const NoteDisplay = () => {
                         <TooltipContent>Copy</TooltipContent>
                     </Tooltip>
                 </div>
-                <div className='ml-auto flex items-center gap-2'>
+                <div className='ml-auto flex items-center gap-1'>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button variant="ghost" size="icon">
@@ -72,6 +72,15 @@ const NoteDisplay = () => {
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent>Delete</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                                <FilePenLine className="h-4 w-4" />
+                                <span className="sr-only">Edit</span>
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Edit</TooltipContent>
                     </Tooltip>
                 </div>
             </div>

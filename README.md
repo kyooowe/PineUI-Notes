@@ -34,7 +34,7 @@ Welcome to PineUI-Notes, where notes meet elegance! This Electron-powered applic
      - Status: Ready to showcase your notes with a clean and organized layout.
 
    - **Note Main Display**
-     - Progress: 0%
+     - Progress: 100%
      - Status: Upcoming feature. Stay tuned for an immersive note-viewing experience.
 
 4. **Database**

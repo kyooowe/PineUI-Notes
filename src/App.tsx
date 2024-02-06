@@ -1,20 +1,21 @@
 // #region Import
-import { Search } from "lucide-react";
-import Navbar from "./components/notes/nav"
+import { FilePlus, Search } from "lucide-react";
+import Navbar from "@/components/notes/nav"
 import { TooltipProvider } from "@radix-ui/react-tooltip";
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./components/ui/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { useState } from "react";
 import { cn } from "./lib/utils";
-import AccountSwitcher from "./components/notes/accountswitcher";
+import AccountSwitcher from "@/components/notes/accountswitcher";
 import { Notes, SideBarLink, accounts } from "./constant/data";
-import { Separator } from "./components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import { Input } from "./components/ui/input";
-import { Button } from "./components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
 import { SideBarLinkProps } from "./interface/ISideBarLink";
-import NoteList from "./components/notes/list";
+import NoteList from "@/components/notes/list";
 import { NoteProps } from "./interface/INotes";
-import NoteDisplay from "./components/notes/note";
+import NoteDisplay from "@/components/notes/note";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 // #endregion
 
 const App = () => {
@@ -37,48 +38,6 @@ const App = () => {
 	// #endregion
 
 	return (
-		// <Navbar
-		// 	isCollapsed={false}
-		// 	links={[
-		// 		{
-		// 			title: "Inbox",
-		// 			label: "128",
-		// 			icon: Inbox,
-		// 			variant: "default",
-		// 		},
-		// 		{
-		// 			title: "Drafts",
-		// 			label: "9",
-		// 			icon: File,
-		// 			variant: "ghost",
-		// 		},
-		// 		{
-		// 			title: "Sent",
-		// 			label: "",
-		// 			icon: Send,
-		// 			variant: "ghost",
-		// 		},
-		// 		{
-		// 			title: "Junk",
-		// 			label: "23",
-		// 			icon: ArchiveX,
-		// 			variant: "ghost",
-		// 		},
-		// 		{
-		// 			title: "Trash",
-		// 			label: "",
-		// 			icon: Trash2,
-		// 			variant: "ghost",
-		// 		},
-		// 		{
-		// 			title: "Archive",
-		// 			label: "",
-		// 			icon: Archive,
-		// 			variant: "ghost",
-		// 		},
-		// 	]}
-		// />
-
 		<div className="w-screen h-screen">
 			<TooltipProvider delayDuration={0}>
 				<ResizablePanelGroup
@@ -116,11 +75,20 @@ const App = () => {
 					>
 						<Tabs defaultValue="all">
 							<div className="flex items-center px-4 py-2">
-								<h1 className="text-xl font-bold">Inbox</h1>
+								<h1 className="text-xl font-bold">Notes</h1>
 								<TabsList className="ml-auto">
 									<TabsTrigger value="all" className="text-zinc-600 dark:text-zinc-200">All Notes</TabsTrigger>
 									<TabsTrigger value="unread" className="text-zinc-600 dark:text-zinc-200">Favorite</TabsTrigger>
 								</TabsList>
+								<Tooltip>
+									<TooltipTrigger asChild className="ml-3">
+										<Button variant="ghost" size="icon">
+											<FilePlus className="h-4 w-4" />
+											<span className="sr-only">Add Note</span>
+										</Button>
+									</TooltipTrigger>
+									<TooltipContent>Add Note</TooltipContent>
+								</Tooltip>
 							</div>
 							<Separator />
 							<div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -135,7 +103,7 @@ const App = () => {
 								<NoteList notes={Notes} />
 							</TabsContent>
 							<TabsContent value="unread" className="m-0">
-							<NoteList notes={Notes.filter((note: NoteProps) => note.isFavorite)} />
+								<NoteList notes={Notes.filter((note: NoteProps) => note.isFavorite)} />
 							</TabsContent>
 						</Tabs>
 					</ResizablePanel>
